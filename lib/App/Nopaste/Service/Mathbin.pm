@@ -1,6 +1,9 @@
 package App::Nopaste::Service::Mathbin;
 BEGIN {
-  $App::Nopaste::Service::Mathbin::VERSION = '0.27';
+  $App::Nopaste::Service::Mathbin::AUTHORITY = 'cpan:DOY';
+}
+{
+  $App::Nopaste::Service::Mathbin::VERSION = '0.28';
 }
 use strict;
 use warnings;
@@ -17,8 +20,7 @@ sub fill_form {
     my %args = @_;
 
     $mech->submit_form(
-        form_number   => 1,
-        fields        => {
+        with_fields => {
             body => $self->fix_eqns($args{text}),
             do { $args{desc} ? (title => $args{desc}) : () },
             do { $args{nick} ? (name  => $args{nick}) : () },
@@ -82,6 +84,7 @@ sub fix_eqns {
 1;
 
 __END__
+
 =pod
 
 =head1 NAME
@@ -90,7 +93,7 @@ App::Nopaste::Service::Mathbin - http://www.mathbin.net/
 
 =head1 VERSION
 
-version 0.27
+version 0.28
 
 =head1 SYNOPSIS
 
@@ -103,12 +106,6 @@ L<Mathbin|http://mathbin.net> pastebin. It also provides a small amount of
 manipulation of the text, such that TeX files should be able to be provided
 unmodified.
 
-=for Pod::Coverage uri
-forbid_in_default
-fill_form
-return
-fix_eqns
-
 =head1 BUGS
 
 No known bugs.
@@ -119,19 +116,9 @@ L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=App-Nopaste-Service-Mathbin>.
 
 =head1 SEE ALSO
 
-Please see those modules/websites for more information related to this module.
-
-=over 4
-
-=item *
-
 L<App::Nopaste>
 
-=item *
-
 L<http://mathbin.net/>
-
-=back
 
 =head1 SUPPORT
 
@@ -161,16 +148,21 @@ L<http://search.cpan.org/dist/App-Nopaste-Service-Mathbin>
 
 =back
 
+=for Pod::Coverage uri
+forbid_in_default
+fill_form
+return
+fix_eqns
+
 =head1 AUTHOR
 
 Jesse Luehrs <doy at tozt dot net>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2011 by Jesse Luehrs.
+This software is copyright (c) 2013 by Jesse Luehrs.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
